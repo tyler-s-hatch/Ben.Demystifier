@@ -2,14 +2,19 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Threading;
+using Ben.Demystifier;
 
 namespace System.Diagnostics.Internal
 {
     /// <summary>
     /// A helper class that contains utilities methods for dealing with reflection.
     /// </summary>
+#if NET6_0_OR_GREATER
+    [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
     public static class ReflectionHelper
     {
         private static PropertyInfo? transformerNamesLazyPropertyInfo;

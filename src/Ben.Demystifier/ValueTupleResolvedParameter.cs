@@ -2,11 +2,16 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Internal;
 using System.Text;
+using Ben.Demystifier;
 
 namespace System.Diagnostics 
 {
+#if NET6_0_OR_GREATER
+    [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
     public class ValueTupleResolvedParameter : ResolvedParameter
     {
         public IList<string> TupleNames { get; }

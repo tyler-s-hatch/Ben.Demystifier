@@ -2,11 +2,16 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using Ben.Demystifier;
 
 namespace System.Diagnostics
 {
     // Adapted from https://github.com/aspnet/Common/blob/dev/shared/Microsoft.Extensions.TypeNameHelper.Sources/TypeNameHelper.cs
+#if NET6_0_OR_GREATER
+    [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
     public static class TypeNameHelper
     {
         public static readonly Dictionary<Type, string> BuiltInTypeNames = new Dictionary<Type, string>
@@ -73,6 +78,9 @@ namespace System.Diagnostics
             return (genericPartIndex >= 0) ? type.Name.Substring(0, genericPartIndex) : type.Name;
         }
 
+        #if NET6_0_OR_GREATER
+        [UnconditionalSuppressMessage("SingleFile", "IL3002:Avoid calling members marked with 'RequiresAssemblyFilesAttribute' when publishing as a single-file", Justification = Constants.SuppressionResurfaced)]
+        #endif
         private static void ProcessType(StringBuilder builder, Type type, DisplayNameOptions options)
         {
             if (type.IsGenericType)
@@ -145,6 +153,9 @@ namespace System.Diagnostics
             }
         }
 
+        #if NET6_0_OR_GREATER
+        [UnconditionalSuppressMessage("SingleFile", "IL3002:Avoid calling members marked with 'RequiresAssemblyFilesAttribute' when publishing as a single-file", Justification = Constants.SuppressionResurfaced)]
+        #endif
         private static void ProcessGenericType(StringBuilder builder, Type type, Type[] genericArguments, int length, DisplayNameOptions options)
         {
             var offset = 0;

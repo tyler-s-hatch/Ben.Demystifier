@@ -2,20 +2,28 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
+using Ben.Demystifier;
 
 namespace System.Diagnostics.Internal
 {
     // Adapted from https://github.com/aspnet/Common/blob/dev/shared/Microsoft.Extensions.StackTrace.Sources/StackFrame/PortablePdbReader.cs
+#if NET6_0_OR_GREATER
+    [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
     internal class PortablePdbReader : IDisposable
     {
         private readonly Dictionary<string, MetadataReaderProvider> _cache =
             new Dictionary<string, MetadataReaderProvider>(StringComparer.Ordinal);
 
+        #if NET6_0_OR_GREATER
+        [UnconditionalSuppressMessage("SingleFile", "IL3000:Avoid accessing Assembly file path when publishing as a single file", Justification = Constants.SuppressionResurfaced)]
+        #endif
         public void PopulateStackFrame(StackFrame frameInfo, MethodBase method, int IlOffset, out string fileName, out int row, out int column)
         {
             fileName = "";
