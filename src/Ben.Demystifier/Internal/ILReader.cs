@@ -1,8 +1,13 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Reflection.Emit;
+using Ben.Demystifier;
 
 namespace System.Diagnostics.Internal
 {
+#if NET6_0_OR_GREATER
+    [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
     internal class ILReader
     {
         private static OpCode[] singleByteOpCode;

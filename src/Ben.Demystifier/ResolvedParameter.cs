@@ -1,10 +1,18 @@
 // Copyright (c) Ben A Adams. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using Ben.Demystifier;
 
 namespace System.Diagnostics
+
 {
+#if NET6_0_OR_GREATER
+    [RequiresUnreferencedCode(Constants.TrimWarning)]
+#endif
     public class ResolvedParameter
     {
         public string? Name { get; set; }
@@ -18,6 +26,9 @@ namespace System.Diagnostics
 
         public override string ToString() => Append(new StringBuilder()).ToString();
 
+#if NET6_0_OR_GREATER
+        [UnconditionalSuppressMessage("SingleFile", "IL3002:Avoid calling members marked with 'RequiresAssemblyFilesAttribute' when publishing as a single-file", Justification = Constants.SuppressionResurfaced)]
+#endif
         public StringBuilder Append(StringBuilder sb)
         {
             if (ResolvedType.Assembly.ManifestModule.Name == "FSharp.Core.dll" && ResolvedType.Name == "Unit")
