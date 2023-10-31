@@ -78,9 +78,9 @@ namespace System.Diagnostics
             return (genericPartIndex >= 0) ? type.Name.Substring(0, genericPartIndex) : type.Name;
         }
 
-        #if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
         [UnconditionalSuppressMessage("SingleFile", "IL3002:Avoid calling members marked with 'RequiresAssemblyFilesAttribute' when publishing as a single-file", Justification = Constants.SuppressionResurfaced)]
-        #endif
+#endif
         private static void ProcessType(StringBuilder builder, Type type, DisplayNameOptions options)
         {
             if (type.IsGenericType)
@@ -153,9 +153,9 @@ namespace System.Diagnostics
             }
         }
 
-        #if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
         [UnconditionalSuppressMessage("SingleFile", "IL3002:Avoid calling members marked with 'RequiresAssemblyFilesAttribute' when publishing as a single-file", Justification = Constants.SuppressionResurfaced)]
-        #endif
+#endif
         private static void ProcessGenericType(StringBuilder builder, Type type, Type[] genericArguments, int length, DisplayNameOptions options)
         {
             var offset = 0;
