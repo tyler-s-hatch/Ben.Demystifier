@@ -9,7 +9,7 @@ using System.Text;
 
 namespace System.Diagnostics
 {
-    internal partial class EnhancedStackTrace : StackTrace, IEnumerable<EnhancedStackFrame>
+    public partial class EnhancedStackTrace : StackTrace, IEnumerable<EnhancedStackFrame>
     {
         public static EnhancedStackTrace Current() => new EnhancedStackTrace(new StackTrace(1 /* skip this one frame */, true));
 

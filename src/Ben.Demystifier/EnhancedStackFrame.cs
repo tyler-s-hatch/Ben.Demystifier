@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace System.Diagnostics
 {
-    internal class EnhancedStackFrame : StackFrame
+    public class EnhancedStackFrame : StackFrame
     {
         private readonly string? _fileName;
         private readonly int _lineNumber;

@@ -12,7 +12,7 @@ namespace System.Diagnostics
 #if NET6_0_OR_GREATER
     [RequiresUnreferencedCode(Constants.TrimWarning)]
 #endif
-    internal static class TypeNameHelper
+    public static class TypeNameHelper
     {
         public static readonly Dictionary<Type, string> BuiltInTypeNames = new Dictionary<Type, string>
         {
