@@ -43,9 +43,11 @@ namespace System.Diagnostics.Internal
             }
 
             var methodToken = MetadataTokens.Handle(method.MetadataToken);
-
-            Debug.Assert(methodToken.Kind == HandleKind.MethodDefinition);
-
+            // Sometimes we get a HandleKind.ModuleDefinition. We simply don't populate those stack frames.
+            if (methodToken.Kind != HandleKind.MethodDefinition)
+            {
+                return;
+            }
             var handle = ((MethodDefinitionHandle)methodToken).ToDebugInformationHandle();
 
             if (!handle.IsNil)
